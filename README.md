@@ -47,7 +47,7 @@ $sudo apt install python3-dbus
 $sudo pip3 install bluedot
 ```
 
-# Installation
+## Installation
 
 Download TESSR code
 
