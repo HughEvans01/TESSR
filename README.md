@@ -32,18 +32,22 @@ Software
 
 STL Files are included if you wish to print your own case, if not you can easily make your own out of whatever you want: early prototypes of TESSR were made out of cardboard. Detailed assembly instructions on the way.
 
-### Setup Software
+### Install requirements
 
-Download Python 3 and Blue Dot module.
+Download Python 3. 
 
 ```
 $sudo apt-get install python3
 ```
 
+Download Blue Dot module.
+
 ```
 $sudo apt install python3-dbus
 $sudo pip3 install bluedot
 ```
+
+# Installation
 
 Download TESSR code
 
@@ -51,32 +55,11 @@ Download TESSR code
 Add download instructions when live!
 ```
 
-Tp set TESSR to run code automatically on start-up, call:
-
-```
-$sudo crontab -e
-```
-
-Select nano (option 2) and then add the following line to the bottom of the file.
-
-```
-@ reboot fullPathToCode/main.py &
-```
-
-Save and exit with [CRTL-X] [Y]. TESSR will now automatically run code in background once powered on.
-
-Set control mode by changing mode variable one line 18.
-
-```
-mode = "remote" #TESSR accepts commands from phone over Bluetooth
-mode = "auto" #TESSR navigates independently
-```
-
 ## Contributing
 
 Open to any and all improvements both to hardware and software. Raise an issue if you'd like to see a feature added or made a pull request through Git Hub if you'd like to contribute. Total cost of hardware not including tools is around £50, no changes will be made to hardware which increase this price.
 
-##Authors
+## Authors
 
 * **Hugh Evans** - *Initial work* - (https://github.com/HughEvans01)
 
