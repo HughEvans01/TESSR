@@ -4,13 +4,14 @@ TESSR
 
 Version 1.0
 >Added remote control via Bluedot from a phone
+>Added ability to remotely take photos
 """
 #Get dependencies
 import time
+import captureImage from cameraUtils
 import ZeroBorg3 as ZeroBorg
 from signal import pause
 from bluedot import BlueDot
-from picamera import PiCamera
 
 class TESSR:
     """Controls all basic behaviors of TESSR"""
@@ -72,11 +73,11 @@ class TESSR:
         elif pos.right:
             self.turnRight()
         elif pos.middle:
-            print("Take picture")
+            captureImage()
 
     def automaticControl(self):
         pass
-Test = TESSR()
+tessr = TESSR()
 
 pause()
  
