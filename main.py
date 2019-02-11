@@ -3,7 +3,7 @@ TESSR
 (The Extremely Small Security Robot)
 
 Version 1.0
->
+>Added remote control via Bluedot from a phone
 """
 #Get dependencies
 import time
@@ -26,8 +26,7 @@ class TESSR:
         ZB.ResetEpo()
         ZB.MotorsOff()
         #Stores motor speeds
-        self.motor1 = 0
-        self.motor2 = 0
+        self.speed = 0
         #
         if mode == "remote":
             #Pair with phone via Bluetooth server
@@ -36,9 +35,44 @@ class TESSR:
                 bd.when_pressed = self.remoteControl
         elif mode == "auto":
             self.automaticControl()
+    
+    def forward(self):
+        if (self.speed < 0):
+            self.speed = 0
+        elif (self.speed < 100):
+            self.speed += 5
+        ZB.SetMotors(self.speed)
 
-    def remoteControl(self):
+    def reverse(self):
+        if (self.speed > 0):
+            self.speed = 0
+        elif (self.speed > -100):
+            self.speed -= 5
+         ZB.SetMotors(self.speed)
 
+    def turnLeft(self):
+        #Check weighting
+        ZB.SetMotor2(0)
+        time.sleep(1)
+        ZB.SetMotor(self.speed)
+
+    def turnRight(self):
+        #Check weighting
+        ZB.SetMotor1(0)
+        time.sleep(1)
+         ZB.SetMotor(self.speed)
+
+    def remoteControl(self,pos):
+        if pos.top:
+            self.forward()
+        elif pos.bottom:
+            self.reverse()
+        elif pos.left:
+            self.turnLeft()
+        elif pos.right:
+            self.turnRight()
+        elif pos.middle:
+            print("Take picture")
 
     def automaticControl(self):
         pass
