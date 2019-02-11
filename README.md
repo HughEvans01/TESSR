@@ -7,7 +7,7 @@ TESSR is a simple, fully 3D printable, Raspberry Pi based robot designed to repl
 ### Requirements
 
 Tools
-* 3D Printer
+* 3D Printer (or 3D printing service, maker space etc)
 * Soldering iron
 * 9V Battery Charger
 
