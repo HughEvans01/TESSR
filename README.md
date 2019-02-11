@@ -36,41 +36,41 @@ STL Files are included if you wish to print your own case, if not you can easily
 
 Download Python 3 and Blue Dot module.
 
-"""
-//  $sudo apt-get install python3
-"""
+```
+$sudo apt-get install python3
+```
 
-"""
-//  $sudo apt install python3-dbus
-//  $sudo pip3 install bluedot
-"""
+```
+$sudo apt install python3-dbus
+$sudo pip3 install bluedot
+```
 
 Download TESSR code
 
-"""
-//  Add download instructions when live!
-"""
+```
+Add download instructions when live!
+```
 
 Tp set TESSR to run code automatically on start-up, call:
 
-"""
-//  $sudo crontab -e
-"""
+```
+$sudo crontab -e
+```
 
 Select nano (option 2) and then add the following line to the bottom of the file.
 
-"""
-//  @ reboot fullPathToCode/main.py &
-"""
+```
+@ reboot fullPathToCode/main.py &
+```
 
 Save and exit with [CRTL-X] [Y]. TESSR will now automatically run code in background once powered on.
 
 Set control mode by changing mode variable one line 18.
 
-"""
+```
 mode = "remote" #TESSR accepts commands from phone over Bluetooth
 mode = "auto" #TESSR navigates independently
-"""
+```
 
 ## Contributing
 
