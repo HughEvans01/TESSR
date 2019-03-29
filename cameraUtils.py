@@ -15,3 +15,5 @@ def captureImage():
 	#Captures and stores a still image
 	time.sleep(1)
 	camera.capture("Images/"+time.asctime().replace(" ","_")+".jpg") #Check path
+
+captureImage()

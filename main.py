@@ -10,6 +10,7 @@ Version 2.0
 """
 #Get dependencies
 import time
+from picamera import PiCamera
 import ZeroBorg3 as ZeroBorg
 from cameraUtils import captureImage
 from signal import pause
@@ -19,7 +20,7 @@ from gpiozero import Button
 class TESSR:
     """Controls all basic behaviors of TESSR"""
 
-    mode = "auto"
+    mode = "remote"
 
     ZB = ZeroBorg.ZeroBorg()
     bumper = Button(14)
