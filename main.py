@@ -5,36 +5,39 @@ TESSR
 Version 1.0
 >Added remote control via Bluedot from a phone
 >Added ability to remotely take photos
+Version 2.0
+>Added object detection via bumper (after issues with UDS)
 """
 #Get dependencies
 import time
-import captureImage from cameraUtils
 import ZeroBorg3 as ZeroBorg
+from cameraUtils import captureImage
 from signal import pause
 from bluedot import BlueDot
+from gpiozero import Button
 
 class TESSR:
     """Controls all basic behaviors of TESSR"""
 
-    mode = "remote"
+    mode = "auto"
 
     ZB = ZeroBorg.ZeroBorg()
-    camera = PiCamera
+    bumper = Button(14)
 
-    def init(self,):
+    def __init__(self):
         #Ready ZeroBorg
-        ZB.Init()
-        ZB.ResetEpo()
-        ZB.MotorsOff()
+        self.ZB.Init()
+        self.ZB.ResetEpo()
+        self.ZB.MotorsOff()
         #Stores motor speeds
         self.speed = 0
         #
-        if mode == "remote":
+        if self.mode == "remote":
             #Pair with phone via Bluetooth server
-            bd = BlueDot()
+            self.bd = BlueDot()
             while True:
-                bd.when_pressed = self.remoteControl
-        elif mode == "auto":
+                self.bd.when_pressed = self.remoteControl
+        elif self.mode == "auto":
             self.automaticControl()
     
     def forward(self):
@@ -42,26 +45,30 @@ class TESSR:
             self.speed = 0
         elif (self.speed < 100):
             self.speed += 5
-        ZB.SetMotors(self.speed)
+        self.ZB.SetMotors(self.speed)
 
     def reverse(self):
         if (self.speed > 0):
             self.speed = 0
         elif (self.speed > -100):
             self.speed -= 5
-         ZB.SetMotors(self.speed)
+        self.ZB.SetMotors(self.speed)
 
     def turnLeft(self):
         #Check weighting
-        ZB.SetMotor2(0)
+        self.ZB.SetMotor1(0)
         time.sleep(1)
-        ZB.SetMotor(self.speed)
+        #self.ZB.SetMotors(self.speed)
 
     def turnRight(self):
         #Check weighting
-        ZB.SetMotor1(0)
+        self.ZB.SetMotor2(0)
         time.sleep(1)
-         ZB.SetMotor(self.speed)
+        #self.ZB.SetMotors(self.speed)
+
+    def stop(self):
+        self.speed = 0
+        self.ZB.SetMotors(self.speed)
 
     def remoteControl(self,pos):
         if pos.top:
@@ -76,8 +83,11 @@ class TESSR:
             captureImage()
 
     def automaticControl(self):
-        pass
-tessr = TESSR()
+        while True:
+            self.forward()
+            if self.bumper.is_held:
+                self.turnLeft()
+                time.sleep(1)
 
-pause()
- 
+robot = TESSR()
+pause() 
